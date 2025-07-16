@@ -21,9 +21,9 @@ This repository is a monorepo containing all code for The Web App, a modern desk
    ```
 2. Start development servers:
    ```sh
-   yarn dev
+   yarn tauri dev
    ```
-   This runs both frontend and backend in development mode using Turborepo.
+   This runs both frontend and backend in development mode using Turborepo, as well as starting the Tauri App. Use `yarn dev` to run without the Tauri App.
 
 3. See individual app READMEs for more details.
 

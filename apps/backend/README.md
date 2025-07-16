@@ -30,7 +30,7 @@ This is the backend API for The Web App, built with [NestJS](https://nestjs.com/
 2. Set up your environment variables. See `.env.example` for required variables.
 3. Run the development server:
    ```sh
-   yarn start:dev
+   yarn dev
    ```
 4. Run tests:
    ```sh
