@@ -1,0 +1,1 @@
+export type CollectionOrArray<T> = T[] | any | undefined | null;

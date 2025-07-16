@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "The Web App",
+  "version": "0.1.7",
+  "identifier": "app.the-web",
+  "build": {
+    "beforeDevCommand": "yarn dev",
+    "devUrl": "http://localhost:3000",
+    "beforeBuildCommand": "yarn build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "The Web App",
+        "width": 1920,
+        "height": 1080,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "createUpdaterArtifacts": true,
+    "publisher": "Josh",
+    "category": "SocialNetworking",
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "plugins": { 
+    "updater": {
+      "active": true,
+      "windows": {
+            "installMode": "passive"
+      },
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDFDOUZGNjI5NzQ5MzZCRDMKUldUVGE1TjBLZmFmSEFDWGJlZEpOTGhoa3BlcTFOOG9LWXdBK2xMS3pDcVFpaWtiSTFTc1VTZjcK",
+      "endpoints": [
+           "https://github.com/JoshCantCode/The-Web-App/releases/latest/download/latest.json"
+      ]
+
+    }
+   }
+}

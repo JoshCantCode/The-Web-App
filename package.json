@@ -1,0 +1,23 @@
+{
+	"name": "the-web-repo",
+	"version": "0.1.0",
+	"description": "",
+	"main": "index.js",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"private": true,
+	"devDependencies": {
+		"turbo": "^latest"
+	},
+	"packageManager": "yarn@1.22.19",
+	"workspaces": ["apps/*", "packages/*"],
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"dev:frontend": "turbo run dev --filter=frontend",
+		"dev:backend": "turbo run start --filter=backend",
+		"check-types": "tsc --noEmit"
+	}
+}

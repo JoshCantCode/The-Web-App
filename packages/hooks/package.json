@@ -1,0 +1,11 @@
+{
+  "name": "@the-web-app/hooks",
+  "version": "0.1.0",
+  "main": "dist/index.ts",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "license": "MIT"
+}
