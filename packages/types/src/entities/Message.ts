@@ -10,7 +10,7 @@ export interface Message {
   editedAt: Date;
   channel: Channel;
   edited: boolean;
-  editedMetadata: EditedMetadata[];
+  editedMetadata?: EditedMetadata[];
 }
 
 

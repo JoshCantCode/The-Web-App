@@ -1,6 +1,6 @@
 'use client'
 
-import { CopyIcon, Hash, MoreHorizontal, Pencil, Trash } from 'lucide-react';
+import { Clock, CopyIcon, Hash, MoreHorizontal, Pencil, Trash } from 'lucide-react';
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -16,6 +16,7 @@ import { useDisclosure } from '@/hooks/use-disclosure';
 import { Channel, Message, NotificationType } from '@the-web-app/types';
 import sendNotification from '@the-web-app/notifications';
 import { Button, ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger, ScrollArea } from '@the-web-app/ui';
+import ViewMessageEditsModal from '../modals/ViewMessageEditsModal';
 
 export default function ChatWindow() {
 	const { channel, server } = useClientState();
@@ -114,7 +115,9 @@ function MessageList({
 }) {
 	const { channel } = useClientState();
 	const [messageBeingEdited, setMessageBeingEdited] = useState<Message | null>(null);
+	const [messageBeingViewed, setMessageBeingViewed] = useState<Message | null>(null);
 	const [isOpen, { open, close }] = useDisclosure();
+	const [isViewEditsOpen, { open: openViewEdits, close: closeViewEdits }] = useDisclosure();
 
 	const handleMessageDelete = async (message: Message) => {
 		if (!message?.id) {
@@ -189,6 +192,11 @@ function MessageList({
 		});
 	};
 
+	const handleMessageViewEdits = (message: Message) => {
+		setMessageBeingViewed(message);
+		openViewEdits();
+	}
+
 	return (
 		<ScrollArea className="h-full" type="auto">
 			<div className="p-4 flex flex-col space-y-6">
@@ -202,6 +210,18 @@ function MessageList({
 						message={messageBeingEdited}
 						onEdit={handleMessageEdit}
 					/>
+				)}
+
+				
+				{messageBeingViewed && (
+					<ViewMessageEditsModal
+					open={isViewEditsOpen}
+					onClose={() => {
+						closeViewEdits();
+						setMessageBeingViewed(null); // clean up
+					}}
+					message={messageBeingViewed}
+				/>
 				)}
 
 				{messages.length > 0
@@ -223,6 +243,13 @@ function MessageList({
 											<Pencil className="mr-2 h-4 w-4" />
 											Edit
 										</ContextMenuItem>
+										<ContextMenuSeparator/>
+										{message.edited ? (
+											<ContextMenuItem onClick={() => handleMessageViewEdits(message)}>
+												<Clock className="mr-2 h-4 w-4" />
+												View Edits
+											</ContextMenuItem>
+										) : null}
 										<ContextMenuSeparator />
 										<ContextMenuItem onClick={() => handleMessageDelete(message)}>
 											<Trash className="mr-2 h-4 w-4" />

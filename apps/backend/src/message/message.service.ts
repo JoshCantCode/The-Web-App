@@ -121,6 +121,7 @@ export class MessageService {
 		this.logger.log(`Found message: ${JSON.stringify(message)}`);
 		this.logger.log(`New content: ${newContent}`);
 		message.content = newContent;
+		message.edited = true;
 
 		const editedMetadata = message.editedMetadata;
 
